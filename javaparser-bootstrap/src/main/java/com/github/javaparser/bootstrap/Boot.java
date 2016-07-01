@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import static java.util.Arrays.asList;
+
 public class Boot {
     private final String SRC = "javaparser-core/src/main/java/";
     private final OutputAggregator aggregator = new FileOutputAggregator(new File(SRC));
@@ -30,8 +32,13 @@ public class Boot {
 
     public void generate() throws Exception {
         Model model = createModel();
-        new HashCodeVisitorGenerator().generate(model, aggregator);
-        new VoidVisitorGenerator().generate(model, aggregator);
+        for (Generator g : asList(
+                new HashCodeVisitorGenerator(), 
+                new VoidVisitorGenerator(), 
+                new GenericVisitorGenerator()
+        )) {
+            g.generate(model, aggregator);
+        }
     }
 
     private Model createModel() throws ParseException, IOException {
