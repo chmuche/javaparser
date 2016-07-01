@@ -16,7 +16,7 @@
         <dependency>
             <groupId>me.tomassetti</groupId>
             <artifactId>java-symbol-solver-core</artifactId>
-            <version>0.2</version>
+            <version>0.3-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.github.javaparser</groupId>
